@@ -784,6 +784,7 @@ export const registry: CategoryEntry[] = [
           "range slider",
           "range input",
           "stepped slider",
+          "inline slider",
           "ticks",
           "volume slider",
           "ruler picker",
@@ -798,6 +799,18 @@ export const registry: CategoryEntry[] = [
             file: "components/motion/range-slider.tsx",
             previewKey: "motion/range-slider",
             previewFile: "components/previews/motion/range-slider.preview.tsx",
+          },
+          {
+            slug: "inline",
+            name: "Inline Slider",
+            description:
+              "An inset fill and inline label and value. Ten evenly spaced stops span the track; markers under text stay hidden but remain interactive, and the thumb parts around either label as it passes.",
+            installSlug: "range-slider-inline",
+            badge: "new",
+            launchedAt: "2026-09-09",
+            file: "components/motion/range-slider-inline.tsx",
+            previewKey: "motion/range-slider-inline",
+            previewFile: "components/previews/motion/range-slider-inline.preview.tsx",
           },
           {
             slug: "fluid",
