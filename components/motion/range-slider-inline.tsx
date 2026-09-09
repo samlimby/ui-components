@@ -55,7 +55,7 @@ export interface InlineSliderProps extends SliderOptions {
   /** Rounds snap-stop values. While dragging, the readout keeps this step's decimal precision. */
   step?: number;
   /** Compact label inside the left edge of the track. */
-  label?: string;
+  label: string;
   /** Formats the inline value without changing its precision. */
   format?: (value: number) => string;
   /** Show markers for the ten evenly spaced snap stops, except where they overlap inline text. */
@@ -66,7 +66,7 @@ export interface InlineSliderProps extends SliderOptions {
 /** An always-visible inline slider with an inset fill and a thumb that parts
  * around its labels, keeping their text readable as the handle passes them. */
 export function InlineSlider({
-  label = "W/H",
+  label,
   format = String,
   showTicks = true,
   className,

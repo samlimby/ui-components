@@ -212,7 +212,7 @@ describe("RangeSlider", () => {
 describe("InlineSlider", () => {
   test("keeps the inline readout visible after pointer release and blur", () => {
     const { getByRole, getAllByText, queryByRole } = render(
-      <InlineSlider defaultValue={48} min={8} max={128} aria-label="Size" />,
+      <InlineSlider label="Size" defaultValue={48} min={8} max={128} aria-label="Size" />,
     );
     const slider = getByRole("slider");
     const track = slider.parentElement as HTMLElement;
@@ -224,7 +224,7 @@ describe("InlineSlider", () => {
 
     expect(slider.getAttribute("aria-valuenow")).toBe("48");
     expect(getAllByText("48")).toHaveLength(1);
-    expect(getAllByText("W/H")).toHaveLength(1);
+    expect(getAllByText("Size")).toHaveLength(1);
     expect(queryByRole("textbox")).toBeNull();
   });
 
@@ -238,7 +238,7 @@ describe("InlineSlider", () => {
 
   test("lets callers supply a spoken unit separately from the display", () => {
     const { getByRole } = render(
-      <InlineSlider defaultValue={48} formatValueText={(value) => `${value} pixels`} />,
+      <InlineSlider label="Size" defaultValue={48} formatValueText={(value) => `${value} pixels`} />,
     );
     expect(getByRole("slider").getAttribute("aria-valuetext")).toBe("48 pixels");
   });

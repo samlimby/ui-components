@@ -7,7 +7,7 @@ afterEach(cleanup);
 
 describe("InlineSlider snap stops", () => {
   test("tracks single-pixel moves independently of the readout and snaps from the release position", async () => {
-    const { getByRole } = render(<InlineSlider min={8} max={128} step={8} defaultValue={48} />);
+    const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} defaultValue={48} />);
     const slider = getByRole("slider");
     const track = slider.parentElement as HTMLElement;
     track.getBoundingClientRect = () => ({ left: 0, width: 292 }) as DOMRect;
@@ -35,7 +35,7 @@ describe("InlineSlider snap stops", () => {
   });
 
   test("follows one-pixel direction changes without a startup dead zone", async () => {
-    const { getByRole } = render(<InlineSlider min={8} max={128} step={8} defaultValue={48} />);
+    const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} defaultValue={48} />);
     const slider = getByRole("slider");
     const track = slider.parentElement as HTMLElement;
     track.getBoundingClientRect = () => ({ left: 0, width: 292 }) as DOMRect;
@@ -53,7 +53,7 @@ describe("InlineSlider snap stops", () => {
 
   test("a track click glides directly to its dot without an intermediate value", () => {
     const onValueChange = mock(() => {});
-    const { getByRole } = render(<InlineSlider min={8} max={128} step={8} defaultValue={48} onValueChange={onValueChange} />);
+    const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} defaultValue={48} onValueChange={onValueChange} />);
     const slider = getByRole("slider");
     const track = slider.parentElement as HTMLElement;
     track.getBoundingClientRect = () => ({ left: 0, width: 292 }) as DOMRect;
@@ -69,7 +69,7 @@ describe("InlineSlider snap stops", () => {
   });
 
   test("parts the thumb into two dots across both inline labels", async () => {
-    const { getByRole } = render(<InlineSlider min={8} max={128} step={8} defaultValue={48} />);
+    const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} defaultValue={48} />);
     const slider = getByRole("slider");
     const track = slider.parentElement as HTMLElement;
     track.getBoundingClientRect = () => ({ left: 0, width: 292 }) as DOMRect;
@@ -96,7 +96,7 @@ describe("InlineSlider snap stops", () => {
       try {
         const onValueChange = mock(() => {});
         const { getByRole } = render(
-          <InlineSlider min={8} max={128} step={8} defaultValue={48} onValueChange={onValueChange} />,
+          <InlineSlider label="Size" min={8} max={128} step={8} defaultValue={48} onValueChange={onValueChange} />,
         );
         const slider = getByRole("slider");
         const track = slider.parentElement as HTMLElement;
@@ -130,7 +130,7 @@ describe("InlineSlider snap stops", () => {
   }
 
   test("keyboard advances between dots and reaches both edges", () => {
-    const { getByRole } = render(<InlineSlider min={8} max={128} step={8} defaultValue={8} />);
+    const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} defaultValue={8} />);
     const slider = getByRole("slider");
     for (const value of [24, 32, 48, 64, 72, 88, 104, 112, 128, 128]) {
       fireEvent.keyDown(slider, { key: "ArrowRight" });
@@ -148,7 +148,7 @@ describe("InlineSlider snap stops", () => {
 
   test("reports the nearest stop without changing a controlled value", () => {
     const onValueChange = mock(() => {});
-    const { getByRole } = render(<InlineSlider min={8} max={128} step={8} value={48} onValueChange={onValueChange} />);
+    const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} value={48} onValueChange={onValueChange} />);
     const slider = getByRole("slider");
     fireEvent.keyDown(slider, { key: "ArrowRight" });
     expect(onValueChange).toHaveBeenLastCalledWith(64);
@@ -156,18 +156,18 @@ describe("InlineSlider snap stops", () => {
   });
 
   test("handles coarse steps, fractional stops, and an empty range", () => {
-    const { getByRole, rerender } = render(<InlineSlider min={0} max={10} step={4} defaultValue={0} />);
+    const { getByRole, rerender } = render(<InlineSlider label="Size" min={0} max={10} step={4} defaultValue={0} />);
     const slider = getByRole("slider");
     for (const value of [4, 8, 10]) {
       fireEvent.keyDown(slider, { key: "ArrowRight" });
       expect(slider.getAttribute("aria-valuenow")).toBe(String(value));
     }
-    rerender(<InlineSlider min={0} max={3} step={0.5} value={1} />);
+    rerender(<InlineSlider label="Size" min={0} max={3} step={0.5} value={1} />);
     const onValueChange = mock(() => {});
-    rerender(<InlineSlider min={0} max={3} step={0.5} value={1} onValueChange={onValueChange} />);
+    rerender(<InlineSlider label="Size" min={0} max={3} step={0.5} value={1} onValueChange={onValueChange} />);
     fireEvent.keyDown(slider, { key: "ArrowRight" });
     expect(onValueChange).toHaveBeenLastCalledWith(1.5);
-    rerender(<InlineSlider min={5} max={5} value={5} onValueChange={onValueChange} />);
+    rerender(<InlineSlider label="Size" min={5} max={5} value={5} onValueChange={onValueChange} />);
     fireEvent.keyDown(slider, { key: "ArrowRight" });
     expect(onValueChange).toHaveBeenLastCalledWith(5);
     expect(slider.getAttribute("aria-valuenow")).toBe("5");
@@ -176,7 +176,7 @@ describe("InlineSlider snap stops", () => {
   for (const ending of ["pointerUp", "pointerCancel", "lostPointerCapture"] as const) {
     test(`${ending} snaps once and ends the drag`, () => {
       const onValueChange = mock(() => {});
-      const { getByRole } = render(<InlineSlider min={8} max={128} step={8} defaultValue={48} onValueChange={onValueChange} />);
+      const { getByRole } = render(<InlineSlider label="Size" min={8} max={128} step={8} defaultValue={48} onValueChange={onValueChange} />);
       const slider = getByRole("slider");
       const track = slider.parentElement as HTMLElement;
       track.getBoundingClientRect = () => ({ left: 0, width: 292 }) as DOMRect;
@@ -195,7 +195,7 @@ describe("InlineSlider snap stops", () => {
 
   test("ignores disabled and secondary-button gestures", () => {
     const onValueChange = mock(() => {});
-    const { getByRole, rerender } = render(<InlineSlider defaultValue={48} disabled onValueChange={onValueChange} />);
+    const { getByRole, rerender } = render(<InlineSlider label="Size" defaultValue={48} disabled onValueChange={onValueChange} />);
     const slider = getByRole("slider");
     const track = slider.parentElement as HTMLElement;
     track.getBoundingClientRect = () => ({ left: 0, width: 292 }) as DOMRect;
@@ -204,7 +204,7 @@ describe("InlineSlider snap stops", () => {
     fireEvent.keyDown(slider, { key: "ArrowRight" });
     expect(slider.tabIndex).toBe(-1);
     expect(onValueChange).not.toHaveBeenCalled();
-    rerender(<InlineSlider defaultValue={48} onValueChange={onValueChange} />);
+    rerender(<InlineSlider label="Size" defaultValue={48} onValueChange={onValueChange} />);
     fireEvent.pointerDown(track, { clientX: 200, pointerId: 1, button: 2 });
     fireEvent.pointerUp(track, { clientX: 200, pointerId: 1, button: 2 });
     expect(onValueChange).not.toHaveBeenCalled();
