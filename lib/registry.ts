@@ -778,7 +778,7 @@ export const registry: CategoryEntry[] = [
         description: "Slider with tick dots and a vertical-bar thumb that bounces as it lands on each step. Drag or keyboard, reduced-motion safe.",
         file: "components/motion/range-slider.tsx",
         badge: "new",
-        launchedAt: "2026-07-31",
+        launchedAt: "2026-09-09",
         keywords: [
           "slider",
           "range slider",
@@ -791,16 +791,6 @@ export const registry: CategoryEntry[] = [
         ],
         examples: [
           {
-            slug: "stepped",
-            name: "Range Slider",
-            description:
-              "Tick dots, and a vertical-bar thumb that bounces as it lands on each step.",
-            installSlug: "range-slider",
-            file: "components/motion/range-slider.tsx",
-            previewKey: "motion/range-slider",
-            previewFile: "components/previews/motion/range-slider.preview.tsx",
-          },
-          {
             slug: "inline",
             name: "Inline Slider",
             description:
@@ -811,6 +801,16 @@ export const registry: CategoryEntry[] = [
             file: "components/motion/range-slider-inline.tsx",
             previewKey: "motion/range-slider-inline",
             previewFile: "components/previews/motion/range-slider-inline.preview.tsx",
+          },
+          {
+            slug: "stepped",
+            name: "Range Slider",
+            description:
+              "Tick dots, and a vertical-bar thumb that bounces as it lands on each step.",
+            installSlug: "range-slider",
+            file: "components/motion/range-slider.tsx",
+            previewKey: "motion/range-slider",
+            previewFile: "components/previews/motion/range-slider.preview.tsx",
           },
           {
             slug: "fluid",
